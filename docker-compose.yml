@@ -9,8 +9,23 @@ services:
       - "3033:3033"
     restart: always
     volumes: 
-      - mariadb
+      - mariadb:/app
     environment:
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_USER: ${DB_USER}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}  
+      MYSQL_DATABSE: ${DB_DATABASE}  
 
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - "80:80"
+      - "443:443"  
+    volumes: 
+      - nginx:/app
+
+volumes:
+  nginx:
+  mariadb:

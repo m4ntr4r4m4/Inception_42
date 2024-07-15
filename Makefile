@@ -4,7 +4,7 @@ DOCKER_COMPOSE = docker-compose
 # Build Docker image
 build:
 	$(DOCKER_COMPOSE) build
-	$(DOCKER_COMPOSE) up -d
+	$(DOCKER_COMPOSE) up
 	
 
 NAME:
@@ -12,7 +12,7 @@ NAME:
 
 # Run Docker container using Docker Compose
 up:  
-	$(DOCKER_COMPOSE) up -d
+	$(DOCKER_COMPOSE) up
 
 # Stop Docker container using Docker Compose
 down:
