@@ -1,11 +1,16 @@
-version 3.8
+version: '3.8'
 
 services:
   mariadb:
-    image: alpine-latest
-    port: "3033:3033"
+    build:
+      context: .
+      dockerfile: Dockerfile.mariadb  
+    ports:
+      - "3033:3033"
     restart: always
-    volume: mariadb
-    MARIA_DB_PASSWORD: ${DB_PASSWORD}
-    MARIA_DB_USER: ${DB_USER}
+    volumes: 
+      - mariadb
+    environment:
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USER}
 
