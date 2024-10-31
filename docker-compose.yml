@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile.mariadb  
     ports:
       - "3033:3033"
-    restart: always
+      #restart: always
     volumes: 
       - mariadb:/app
     environment:
@@ -21,8 +21,8 @@ services:
       context: .
       dockerfile: Dockerfile.nginx
     ports:
-      - "80:80"
-      - "443:443"  
+      - "8000:8000"
+      - "4443:4443"  
     volumes: 
       - nginx:/app
 
