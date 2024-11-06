@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile.mariadb  
     ports:
       - "3033:3033"
-      #restart: always
+    restart: always
     volumes: 
       - mariadb:/app
     environment:
@@ -15,6 +15,8 @@ services:
       MYSQL_USER: ${DB_USER}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}  
       MYSQL_DATABSE: ${DB_DATABASE}  
+    networks:
+      - backend
 
   nginx:
     build:
@@ -25,7 +27,14 @@ services:
       - "4443:4443"  
     volumes: 
       - nginx:/app
+    depends_on:
+      - mariadb
+    networks:
+      - backend
 
 volumes:
   nginx:
   mariadb:
+
+networks:
+  backend:    

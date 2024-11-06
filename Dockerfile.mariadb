@@ -1,7 +1,12 @@
-FROM debian:buster
+FROM debian:latest
 
-RUN apt update -y && apt upgrade -y && apt install mariadb-server -y
-HEALTHCHECK --start-period=5m \
-  CMD mariadb -e 'SELECT @@datadir;' || exit 1
+RUN apt update -y && apt upgrade -y && apt install mariadb-server mariadb-client -y
 
-CMD ["mariadb"]
+RUN useradd --create-home m4ntr4
+RUN chown -R m4ntr4:m4ntr4 /var/lib/mysql
+RUN mkdir -p /run/mysqld && chown -R m4ntr4:m4ntr4 /run/mysqld
+
+
+USER m4ntr4
+
+CMD ["mariadbd"]
