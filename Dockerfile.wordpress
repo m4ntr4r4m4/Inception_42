@@ -12,10 +12,6 @@ RUN wget https://wordpress.org/latest.zip -P /tmp
 RUN unzip /tmp/latest.zip -d /var/www/html
 RUN rm /tmp/latest.zip
 
-# Ensure PHP-FPM listens on port 9000
-
-# Expose PHP-FPM port
-EXPOSE 9000
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/wordpress \
