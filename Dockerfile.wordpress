@@ -13,7 +13,6 @@ RUN unzip /tmp/latest.zip -d /var/www/html
 RUN rm /tmp/latest.zip
 
 # Ensure PHP-FPM listens on port 9000
-RUN sed -i 's/listen = .*/listen = 0.0.0.0:9000/' /etc/php/7.3/fpm/pool.d/www.conf
 
 # Expose PHP-FPM port
 EXPOSE 9000
@@ -21,6 +20,7 @@ EXPOSE 9000
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/wordpress \
     && chmod -R 755 /var/www/html/wordpress
+RUN mkdir -p /run/php/
 
 # Start PHP-FPM in the foreground
 CMD ["php-fpm7.3", "-F"]
