@@ -10,7 +10,6 @@
 
 #!/bin/bash
 # Start MariaDB in the background
-envsubst < /docker-entrypoint-initdb.d/init-db.sql > /tmp/init-db.sql
 
 mysqld_safe &
 
@@ -21,7 +20,12 @@ until mysqladmin ping --silent; do
 done
 
 # Now that MariaDB is running, run the initialization SQL file
-mysql < /docker-entrypoint-initdb.d/init-db.sql
+echo "CREATE DATABASE IF NOT EXISTS $DB_DATABASE;" >> /var/lib/mysql/init-db.sql
+echo "CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD' ;" >>  /var/lib/mysql/init-db.sql
+echo "GRANT ALL PRIVILEGES ON $DB_DATABASE.* TO '$DB_USER'@'%';" >>  /var/lib/mysql/init-db.sql
+echo "FLUSH PRIVILEGES;" >>  /var/lib/mysql/init-db.sql
+
+mysql <  /var/lib/mysql/init-db.sql
 
 # Keep MariaDB running in the foreground
 wait

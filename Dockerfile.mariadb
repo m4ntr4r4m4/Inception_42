@@ -2,11 +2,15 @@ FROM debian:latest
 
 RUN apt update -y && apt upgrade -y && apt install mariadb-server mariadb-client -y
 
-RUN useradd --create-home m4ntr4
-RUN chown -R m4ntr4:m4ntr4 /var/lib/mysql
-RUN mkdir -p /run/mysqld && chown -R m4ntr4:m4ntr4 /run/mysqld
+COPY init-db.sql /docker-entrypoint-initdb.d/
+RUN mkdir -p /var/lib/mysql && chown -R mysql:mysql /var/lib/mysql
+RUN mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld
+COPY db_script.sh /db_script.sh
+RUN chmod +x /db_script.sh
 
 
-USER m4ntr4
 
-CMD ["mariadbd"]
+USER mysql
+
+ENTRYPOINT ["/db_script.sh"]
+CMD ["./db_script.sh"]

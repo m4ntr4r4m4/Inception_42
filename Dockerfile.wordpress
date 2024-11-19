@@ -9,18 +9,21 @@ RUN mkdir -p /var/www/html \
     && chown -R www-data:www-data /var/www/html
 
 # Download and unzip WordPress
-RUN wget https://wordpress.org/latest.zip -P /tmp
-RUN unzip /tmp/latest.zip -d /var/www/html
-RUN rm /tmp/latest.zip
+#RUN wget https://wordpress.org/latest.zip -P /tmp
+#RUN unzip /tmp/latest.zip -d /var/www/html
+#RUN rm /tmp/latest.zip
 
 
 # Set permissions
+RUN mkdir -p /var/www/html/wordpress
 RUN chown -R www-data:www-data /var/www/html/wordpress \
     && chmod -R 755 /var/www/html/wordpress
 RUN mkdir -p /run/php/
 
+#COPY ./wp-config.php /var/www/html/wordpress/
 
-
+COPY ./start-installing.sh /
 # Start PHP-FPM in the foreground
-CMD ["php-fpm7.3", "-F"]
+#CMD ["php-fpm7.3", "-F"]
+CMD ["./start-installing.sh"]
 
