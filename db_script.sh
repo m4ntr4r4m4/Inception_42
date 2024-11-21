@@ -28,5 +28,5 @@ echo "FLUSH PRIVILEGES;" >>  /var/lib/mysql/init-db.sql
 
 mysql <  /var/lib/mysql/init-db.sql
 mysqladmin shutdown
-exec mysqld
+mysqld
 # Keep MariaDB running in the foreground
