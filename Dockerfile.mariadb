@@ -8,9 +8,9 @@ RUN mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld
 COPY db_script.sh /db_script.sh
 RUN chmod +x /db_script.sh
 
+RUN sed -i -r "s/127.0.0.1/0.0.0.0/1"   /etc/mysql/mariadb.conf.d/50-server.cnf
 
 
 USER mysql
 
 ENTRYPOINT ["/db_script.sh"]
-CMD ["./db_script.sh"]

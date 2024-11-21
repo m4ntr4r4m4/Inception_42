@@ -25,8 +25,8 @@ echo "CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD' ;" >
 echo "GRANT ALL PRIVILEGES ON $DB_DATABASE.* TO '$DB_USER'@'%';" >>  /var/lib/mysql/init-db.sql
 echo "FLUSH PRIVILEGES;" >>  /var/lib/mysql/init-db.sql
 
+
 mysql <  /var/lib/mysql/init-db.sql
-
+mysqladmin shutdown
+exec mysqld
 # Keep MariaDB running in the foreground
-wait
-
