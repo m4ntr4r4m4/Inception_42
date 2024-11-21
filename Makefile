@@ -3,8 +3,8 @@ DOCKER_COMPOSE = docker-compose
 
 # Build Docker image
 build:
-	$(DOCKER_COMPOSE) build
-	$(DOCKER_COMPOSE) up
+	$(DOCKER_COMPOSE) -f ./src/docker-compose.yml build
+	$(DOCKER_COMPOSE) -f ./src/docker-compose.yml  up
 	
 
 NAME:
@@ -12,15 +12,15 @@ NAME:
 
 # Run Docker container using Docker Compose
 up:  
-	$(DOCKER_COMPOSE) up
+	$(DOCKER_COMPOSE) -./src/docker-compose.yml  up
 
 # Stop Docker container using Docker Compose
 down:
-	$(DOCKER_COMPOSE) down
+	$(DOCKER_COMPOSE) -f ./src/docker-compose.yml down
 
 # Remove Docker container and image
 clean:
-	$(DOCKER_COMPOSE) down --volumes --remove-orphans
+	$(DOCKER_COMPOSE) -f ./src/docker-compose.yml  down --volumes --remove-orphans
 	docker-compose rm -f
 
 # Default target

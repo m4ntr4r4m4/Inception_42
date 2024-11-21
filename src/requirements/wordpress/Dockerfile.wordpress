@@ -28,7 +28,7 @@ RUN mkdir -p /run/php/
 
 #COPY ./wp-config.php /var/www/html/wordpress/
 
-COPY ./start-installing.sh /
+COPY ./tools/start-installing.sh /
 # Start PHP-FPM in the foreground
 #CMD ["php-fpm7.3", "-F"]
 CMD ["./start-installing.sh"]
