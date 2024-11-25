@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:rc-buggy
 
 EXPOSE 9000 
 # Install necessary dependencies including PHP 7.3 FPM

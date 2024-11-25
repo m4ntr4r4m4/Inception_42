@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:rc-buggy
 
 RUN apt update -y && apt upgrade -y && apt install nginx openssl -y
 #COPY  ./nginx.conf /etc/nginx/nginx.conf 

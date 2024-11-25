@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:rc-buggy
 
 RUN apt update -y && apt upgrade -y && apt install mariadb-server mariadb-client -y
 
