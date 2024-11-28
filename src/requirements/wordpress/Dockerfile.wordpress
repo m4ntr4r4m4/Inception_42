@@ -2,7 +2,7 @@ FROM debian:rc-buggy
 
 EXPOSE 9000 
 # Install necessary dependencies including PHP 7.3 FPM
-RUN apt update -y && apt upgrade -y && apt install php-mysql  php7.3-fpm curl wget unzip -y
+RUN apt update -y && apt upgrade -y && apt install php8.4-mysql  php8.4-fpm curl wget unzip -y
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar 
 
 RUN chmod +x wp-cli.phar 

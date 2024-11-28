@@ -20,10 +20,13 @@ sed -i -r "s/username_here/$DB_USER/1" /var/www/html/wp-config.php
 sed -i -r "s/password_here/$DB_PASSWORD/1"   /var/www/html/wp-config.php
 sed -i -r "s/localhost/mariadb/1"   /var/www/html/wp-config.php
 
+#sed -i -r "s/'/run/php/php8.4-fpm.sock'/'0.0.0.0:9000'/1"   /etc/php/8.4/fpm/pool.d/www.conf
+sed -i -r "s|listen = run/php/php8.4-fpm.sock|listen = 0.0.0.0:9000|1" /etc/php/8.4/fpm/pool.d/www.conf
+
 wp core install --url=$DOMAIN_NAME/ --title=$WP_TITLE --admin_user=$WP_ADMIN_USR --admin_password=$WP_ADMIN_PWD --admin_email=$WP_ADMIN_EMAIL --skip-email --allow-root
 wp user create $WP_USR $WP_EMAIL --role=author --user_pass=$WP_PWD --allow-root
 
 
 
 echo "WordPress Is Ready!!!!!"
-php-fpm7.3 -F
+php-fpm8.4 -F
